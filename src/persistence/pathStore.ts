@@ -2,7 +2,7 @@ import {keyToPath} from "./pathUtil.ts";
 import {MIMETYPE_OCTET_STREAM, MIMETYPE_PLAIN_TEXT} from "./mimeTypes.ts";
 import {createNonGlobalRegex, escapeRegexCharacters} from "@/common/regExUtil";
 
-const DB_NAME = 'quibleyManor';
+const DB_NAME = 'your-app-name';
 const KEY_VALUE_STORE = 'KeyValue';
 const PATH_INDEX_NAME = 'pathIndex';
 
