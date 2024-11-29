@@ -1,9 +1,8 @@
 import styles from './LoadScreen.module.css';
 import { init } from "./interactions/initialization";
 import {HOME_URL} from "@/common/urlUtil.ts";
+import ProgressBar from '@/components/progressBar/ProgressBar';
 
-import 'sl-react-ui/dist/style.css';
-import {ProgressBar, ToastPane} from "sl-react-ui";
 import {useState, useEffect} from "react";
 import {useLocation} from "wouter";
 
@@ -25,7 +24,6 @@ function LoadScreen() {
           {currentTask}
         </div>
       </div>
-      <ToastPane />
     </div>
   );
 }

@@ -1,5 +1,4 @@
 export const MIMETYPE_AUDIO_WAV = 'audio/wav';
-export const MIMETYPE_FOUNTAIN = 'text/vnd.fountain'; // I don't actually know the "official" MIME type of Fountain. Please holler at me if you do.
 export const MIMETYPE_GIF = 'image/gif';
 export const MIMETYPE_JPEG = 'image/jpeg';
 export const MIMETYPE_OCTET_STREAM = 'application/octet-stream';
@@ -14,7 +13,6 @@ type MimeTypeToExtensionMap = {
 
 const MIMETYPE_TO_EXTENSION_MAP:MimeTypeToExtensionMap = {
   [MIMETYPE_AUDIO_WAV]: 'wav',
-  [MIMETYPE_FOUNTAIN]: 'fountain',
   [MIMETYPE_GIF]: 'gif',
   [MIMETYPE_JPEG]: 'jpg',
   [MIMETYPE_OCTET_STREAM]: 'bin',
@@ -22,7 +20,6 @@ const MIMETYPE_TO_EXTENSION_MAP:MimeTypeToExtensionMap = {
   [MIMETYPE_PNG]: 'png',
   [MIMETYPE_JSON]: 'json'
 };
-
 
 const DEFAULT_EXTENSION = '';
 

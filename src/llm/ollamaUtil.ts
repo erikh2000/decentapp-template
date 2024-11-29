@@ -6,7 +6,9 @@ import StatusUpdateCallback from "./types/StatusUpdateCallback";
 import { addAssistantMessageToChatHistory, addUserMessageToChatHistory, createChatHistory } from "./messageUtil";
 import LLMMessages from "./types/LLMMessages";
 
-const MODEL = "llama3";
+const MODEL = "llama3.1";
+const DOMAIN = '127.0.0.1';
+const PORT = 11434;
 
 function _normalizeModelName(modelName:string):string {
   return modelName.split(':')[0].trim().toLowerCase();
@@ -26,8 +28,8 @@ function _parsePullModelChunk(chunk:Object):[status:string, percentComplete:numb
 }
 
 async function _findOllamaServer():Promise<string|null> {
-  const domain = '127.0.0.1';
-  const port = 11434;
+  const domain = DOMAIN;
+  const port = PORT;
   return await isHostListening(domain, port, 1000) ? `http://${domain}:${port}` : null;
 }
 
