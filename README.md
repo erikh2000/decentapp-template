@@ -64,7 +64,7 @@ The Ollama and WebLLM projects largely overlap in the models they provide, but n
   * init/ - routing, plus location for any source files called as part of initialiation.
   * developer/ - code that is really only meant to run at dev time - testing tools, profiling, backdoors.
   * llm/ - client access and other utilities around LLM. llmUtil.ts has top-level functions for calling an inference interface provided either by Ollama or WebLLM.
-  * persistence/ - utilities around persisting data in IndexedDb in a key/document style with capability of importing/exporting as ZIP.
+  * persistence/ - utilities around persisting data in IndexedDb in a key/document style with capability of importing/exporting documents as files.
   * startScreen/ - screen that is only visible in development. In production, navigates immediately to loadScreen.
   * loadScreen/ - screen that loads the chosen LLM model locally and shows progress.
   * homeScreen/ - screen that is arrived at after loading completes. In the template, this screen has no functionality.
