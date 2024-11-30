@@ -41,6 +41,10 @@ export async function init(onStatusUpdate:StatusUpdateCallback) {
   theConnection.state = LLMConnectionState.READY;
 }
 
+export function isLlmConnected():boolean {
+  return theConnection.state === LLMConnectionState.READY || theConnection.state === LLMConnectionState.GENERATING;
+}
+
 export function setSystemMessage(message:string|null) {
   messages.systemMessage = message;
 }

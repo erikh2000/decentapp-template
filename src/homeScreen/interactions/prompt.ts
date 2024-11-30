@@ -1,4 +1,4 @@
-import { generate } from "@/llm/llmUtil";
+import { generate, isLlmConnected } from "@/llm/llmUtil";
 
 export const SYSTEM_MESSAGE = "You are a screen in a web app. Your name is \"Screen\"." +
   "Someone called \"Screen-Mama\" taught you all you know." +
@@ -12,6 +12,7 @@ export const GENERATING = '...';
 export async function submitPrompt(prompt:string, setPrompt:Function, setResponseText:Function) {
     setResponseText(GENERATING);
     try {
+      if (!isLlmConnected()) { setResponseText('LLM is not connected. This happens in dev environments with hot reload. You can reload from the start URL.'); return; }
       generate(prompt, (status:string) => setResponseText(status));
       setPrompt('');
     } catch(e) {
