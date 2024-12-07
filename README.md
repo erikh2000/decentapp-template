@@ -40,6 +40,10 @@ The template isn't a framework. It's just a reasonable starting point for a cert
 Following this sensibility, things like the LLM wrapper, widgets, and persistence functionality are in-lined into the project rather than kept as dependencies in packages.
 This practice is sometimes called "vendoring". The basic rationale is that sometimes it's a better to spend time understanding and writing code rather than maintaining the sprawl of a thousand or more packages. These decisions have tradeoffs, but I prefer to set the balance towards low-dependency development.
 
+## PWA Support
+
+You'll see a little bit of extra code for PWA support - the service worker registration and a manifest.json file. If this is unwelcome complexity, feel free to delete it. But it does give you and your users an ability to install the web app locally as an app that can run fully offline.
+
 ## Using Ollama Instead of WebLLM
 
 I've found that Ollama is better to use during development, because it keeps the LLM available even if you refresh-browser/hot-reload your web app. Ollama is a separate process that runs natively and must be installed. A local web server is able to make `fetch()` calls to a local Ollama server. But when you deploy your web app to a production web host, the web app will no longer be able to call Ollama or any local server (without contriving a specific configuration that users of your web app are unlikely to repeat).

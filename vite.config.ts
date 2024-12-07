@@ -15,6 +15,9 @@ export default defineConfig(({mode}) => {
     resolve: {
       alias: { '@': '/src' }
     },
-    build: { sourcemap: true }
+    build: { 
+      sourcemap: true, 
+      manifest: true
+    }
   };
 });
