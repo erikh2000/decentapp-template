@@ -21,9 +21,8 @@ Please see my comments about doing this in the [`create-decent-app` readme](http
 
 The unmodified template installed for Decent App includes these screens:
 
-* A start screen that shows up in local-hosted dev environments that requires the click of a button before loading the LLM. This is to avoid hot-reloads causing an immediate full LLM load as you change code.
 * A loading screen that will show progress loading either Ollama (optional for development) or WebLLM (production).
-* A home screen that lets you send a simple prompt to a local LLM.
+* A home screen that lets you send a simple prompt to a local LLM. Arriving to the home screen without an LLM connection will redirect to the loading screen. This redirection will be confirmed with a dialog if you are serving locally. This is to avoid excessive LLM reloading triggered by code changes during development.
 
 The dependencies are minimal: (see package.json)
 
@@ -46,7 +45,7 @@ You'll see a little bit of extra code for PWA support - the service worker regis
 
 ## Using Ollama Instead of WebLLM
 
-I've found that Ollama is better to use during development, because it keeps the LLM available even if you refresh-browser/hot-reload your web app. Ollama is a separate process that runs natively and must be installed. A local web server is able to make `fetch()` calls to a local Ollama server. But when you deploy your web app to a production web host, the web app will no longer be able to call Ollama or any local server (without contriving a specific configuration that users of your web app are unlikely to repeat).
+I've found that Ollama is sometimes better to use during development, because it keeps the LLM available even if you refresh-browser/hot-reload your web app. Ollama is a separate process that runs natively and must be installed. A local web server is able to make `fetch()` calls to a local Ollama server. But when you deploy your web app to a production web host, the web app will no longer be able to call Ollama or any local server (without contriving a specific configuration that users of your web app are unlikely to repeat).
 
 So basically, WebLLM will work for both local development and production hosting. But Ollama is nicer for local development. And WebLLM (not Ollama) will work for production web hosting.
 
@@ -69,9 +68,8 @@ The Ollama and WebLLM projects largely overlap in the models they provide, but n
   * developer/ - code that is really only meant to run at dev time - testing tools, profiling, backdoors.
   * llm/ - client access and other utilities around LLM. llmUtil.ts has top-level functions for calling an inference interface provided either by Ollama or WebLLM.
   * persistence/ - utilities around persisting data in IndexedDb in a key/document style with capability of importing/exporting documents as files.
-  * startScreen/ - screen that is only visible in development. In production, navigates immediately to loadScreen.
   * loadScreen/ - screen that loads the chosen LLM model locally and shows progress.
-  * homeScreen/ - screen that is arrived at after loading completes. In the template, this screen has no functionality.
+  * homeScreen/ - screen that is arrived at after loading completes. In the template, this screen has a basic LLM chat interface that can be replaced.
 * public/ - files and folders that will be web-accessible in the folder that built bundles and index.html are deployed to.
 * .github - Continuous deployment script that will deploy on push to a folder on decentapps.net. Requires configuration of secret vars on the Github repo - otherwise deployment will fail benignly when you push. You can delete/edit this script if you don't want to deploy to decentapps.net.
 
@@ -102,3 +100,5 @@ The project isn't open to contributions at this point. But that could change. Co
 ## Contacting
 
 You can reach me via my [LinkedIn profile](https://www.linkedin.com/in/erikhermansen/). I'll accept connections if you will just mention "decent apps" or some other shared interest in your connection request.
+
+-Erik Hermansen

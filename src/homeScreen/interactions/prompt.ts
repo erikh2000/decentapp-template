@@ -1,3 +1,4 @@
+import { isServingLocally } from "@/developer/devEnvUtil";
 import { generate, isLlmConnected } from "@/llm/llmUtil";
 
 export const SYSTEM_MESSAGE = "You are a screen in a web app. Your name is \"Screen\"." +
@@ -12,7 +13,14 @@ export const GENERATING = '...';
 export async function submitPrompt(prompt:string, setPrompt:Function, setResponseText:Function) {
     setResponseText(GENERATING);
     try {
-      if (!isLlmConnected()) { setResponseText('LLM is not connected. This happens in dev environments with hot reload. You can reload from the start URL.'); return; }
+      
+      if (!isLlmConnected()) { 
+        const message = isServingLocally() 
+        ? `LLM is not connected. You're in a dev environment where this is expected (hot reloads, canceling the LLM load). You can refresh the page to load the LLM.`
+        : 'LLM is not connected. Try refreshing the page.';
+        setResponseText(message); 
+        return; 
+      }
       generate(prompt, (status:string) => setResponseText(status));
       setPrompt('');
     } catch(e) {
