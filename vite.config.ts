@@ -18,6 +18,10 @@ export default defineConfig(({mode}) => {
     build: { 
       sourcemap: true, 
       manifest: true
+    },
+    test: {
+      environment: 'node',
+      globals: true
     }
   };
 });
