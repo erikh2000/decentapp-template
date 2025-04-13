@@ -28,7 +28,7 @@ The dependencies are minimal: (see package.json)
 
 * wouter - Basic URL routing.
 * webllm - For web-based LLM inference.
-* dev dependencies for Vite/Babel/Typescript (build tooling), Jest (test runner)
+* dev dependencies for Vite/Babel/Typescript (build tooling), Vitest (test runner)
 
 There is no monolithic dev-dependency package to install and upgrade in the `create-react-app` style. You can consider the Decent App project generated from this template as "ejected".
 
