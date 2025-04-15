@@ -3,23 +3,26 @@ import styles from './HomeScreen.module.css';
 import eyesPng from './images/eyes.png';
 import { init } from "./interactions/initialization";
 import { GENERATING, submitPrompt } from "./interactions/prompt";
-
 import ContentButton from '@/components/contentButton/ContentButton';
+import LoadScreen from '@/loadScreen/LoadScreen';
+
 import { useEffect, useState } from "react";
-import LLMDevPauseDialog from './dialogs/LLMDevPauseDialog';
-import { useLocation } from 'wouter';
-import { LOAD_URL } from '@/common/urlUtil';
 
 function HomeScreen() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [prompt, setPrompt] = useState<string>('');
   const [responseText, setResponseText] = useState<string>('');
-  const [modalDialog, setModalDialog] = useState<string|null>(null);
   const [eyesState, setEyesState] = useState<string>('');
-  const [, setLocation] = useLocation();
   
   useEffect(() => {
-    init(setLocation, setModalDialog).then(() => { });
-  }, []);
+    if (isLoading) return;
+
+    init().then(isLlmConnected => { 
+      if (!isLlmConnected) setIsLoading(true);
+    });
+  }, [isLoading]);
+
+  if (isLoading) return <LoadScreen onComplete={() => setIsLoading(false)} />;
 
   function _onKeyDown(e:React.KeyboardEvent<HTMLInputElement>) {
     if(e.key === 'Enter' && prompt !== '') submitPrompt(prompt, setPrompt, _onRespond);
@@ -42,8 +45,6 @@ function HomeScreen() {
         <ContentButton text="Send" onClick={() => submitPrompt(prompt, setPrompt, _onRespond)} /></p>
         {response}
       </div>
-
-      <LLMDevPauseDialog isOpen={modalDialog === LLMDevPauseDialog.name} onConfirm={() => setLocation(LOAD_URL)} onCancel={() => setModalDialog(null)} />
     </div>
   );
 }

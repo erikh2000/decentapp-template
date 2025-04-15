@@ -18,8 +18,7 @@
     "@mlc-ai/web-runtime": "^0.18.0-dev2",
     "@mlc-ai/web-tokenizers": "^0.1.5",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "wouter": "^3.6.0"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",

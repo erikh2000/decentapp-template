@@ -13,27 +13,6 @@ export function parseBasePathFromUriPath(path:string) {
   return isStagedApp ? `/${appName}/${pathSegments[1]}/` : `/${appName}/`;
 }
 
-// From https://127.0.0.1:8080/path/to/file to https://127.0.1:8080/ and variants. Basically, just the scheme, domain, and port.
-export function parseDomainUrlFromUrl(url:string) {
-  const urlObject = new URL(url);
-  return `${urlObject.protocol}//${urlObject.hostname}${urlObject.port ? ':' + urlObject.port : ''}/`;
-}
-
-// Add missing scheme and hostname as needed. Retain full path.
-export function normalizeUrl(url:string):string {
-  const urlObject = new URL(url, window.location.href);
-  return urlObject.href.toString();
-}
-
-// Add a cache-busting query string to the URL, which may or may not already have a query string.
-export function cacheBustUrl(url:string):string {
-  const urlObject = new URL(url, window.location.href);
-  const params = new URLSearchParams(urlObject.search);
-  params.set('v', Date.now().toString());
-  urlObject.search = params.toString();
-  return urlObject.href.toString();
-}
-
 /* istanbul ignore next */ // Web-DOM-specific code that is not useful to test.
 function _getBasePath() {
   if (!theBasePath) { theBasePath = parseBasePathFromUriPath(window.location.pathname); }
@@ -45,6 +24,3 @@ export function baseUrl(path: string) {
   const basePath = _getBasePath();
   return `${basePath}${path}`;
 }
-
-export const HOME_URL = baseUrl('/');
-export const LOAD_URL = baseUrl('/load');
