@@ -13,9 +13,19 @@ There's some dev-specific content below to get you started. I figure you might r
 3. `npm run dev`
 4. Browse to http://localhost:3000/ or whatever URL is shown in the output of the previous command.
 
-## Deploying to the Decent Portal (decentapps.net)
+## Creating an App for Decent Portal
 
-Please see my comments about doing this in the [`create-decent-app` readme](https://github.com/erikh2000/create-decent-app/blob/main/readme.md).
+If you'd like to make an app that can be deployed to the Decent Portal.
+
+1. Change your working directory to the project root (folder this file is in).
+2. `npm install decent-portal`
+3. `npm run portal`
+
+What will this do?
+
+It will create Github action files for deploying, promoting, and rolling back into your project. For these to work, you will need to configure a Github repository with secret variables provided by us. Email launch@decentapps.net for more info.
+
+It will make the <DecentBar> React component importable from the library. You can add this into your screens to show UI that allows navigation through the portal. The component can be configured to only render from decentapps.net if you want to deploy the same app to other websites.
 
 ## What You Have Now
 
@@ -27,9 +37,17 @@ The unmodified template installed for Decent App includes these screens:
 The dependencies are minimal: (see package.json)
 
 * webllm - For web-based LLM inference.
-* dev dependencies for Vite/Babel/Typescript (build tooling), Vitest (test runner)
+* dev dependencies for Vite/Typescript (build tooling), Vitest (test runner)
 
-There is no monolithic dev-dependency package to install and upgrade in the `create-react-app` style. You can consider the Decent App project generated from this template as "ejected".
+There is no monolithic dev-dependency package to install and upgrade. You are in charge of updating and revising your dependencies in the way you like.
+
+## What Happened to Ollama Support? (2.0 Update)
+
+I'm trying to streamline the code by removing Ollama support. There is a concept of a Custom LLM that I've implemented in [Hone](https://github.com/erikh2000/hone) and may bring to create-decent-app in a later release. This would allow using Ollama and other LLM servers/services. Let me know if you have an interest.
+
+## What Happened to Wouter/URL-Based Routes? (2.0 Update)
+
+Again, streamlining. I try to remove dependencies where I can. Much as I like Wouter, I think most devs won't need it. There are only two screens in the generated project, and one of them (the loading screen) isn't useful to be accessed from a URL. If you do want a router, feel free to install Wouter (recommended!) or your favorite library.
 
 ## Removing and Changing Unwanted Things
 
@@ -42,41 +60,28 @@ This practice is sometimes called "vendoring". The basic rationale is that somet
 
 You'll see a little bit of extra code for PWA support - the service worker registration and a manifest.json file. If this is unwelcome complexity, feel free to delete it. But it does give you and your users an ability to install the web app locally as an app that can run fully offline.
 
-## Using Ollama Instead of WebLLM
-
-I've found that Ollama is sometimes better to use during development, because it keeps the LLM available even if you refresh-browser/hot-reload your web app. Ollama is a separate process that runs natively and must be installed. A local web server is able to make `fetch()` calls to a local Ollama server. But when you deploy your web app to a production web host, the web app will no longer be able to call Ollama or any local server (without contriving a specific configuration that users of your web app are unlikely to repeat).
-
-So basically, WebLLM will work for both local development and production hosting. But Ollama is nicer for local development. And WebLLM (not Ollama) will work for production web hosting.
-
-You can find instructions to install Ollama at [ollama.com](https://ollama.com/). Once it is installed and running on the same device as your dev environment, Decent App will connect to it in local dev hosting, but not production hosting. If Decent App doesn't find Ollama, it will use WebLLM.
-
-If you want to run Ollama from a different IP address or port than the defaults, edit the constants found at the top of `/src/llm/ollamaUtil.ts`.
-
 ## Changing LLM Models
 
-You can set the MODEL constant at the top of `/src/llm/ollamaUtil.ts` and `/src/llm/webLlmUtil.ts` to be what you want. There are defaults set already that you can leave if you like them.
-
-The Ollama and WebLLM projects largely overlap in the models they provide, but not exactly. For example, at time of writing, WebLLM seems to have dropped some older Llama models that Ollama still supports. For your development, I would try to use the same model in Ollama that you will use for WebLLM. This is admittedly difficult with the different model-mapping/retention approaches of the two projects. A useful strategy could be to use WebLLM for prompt engineering sessions and accept that Ollama might be loading a slightly different model that gives different behavior.
+You can set the MODEL constant at the top of `/src/llm/webLlmUtil.ts` to be what you want. There is a default set there that is a "medium" choice based on balancing between capabilities and what people can run. On the Decent Portal, there's value in having a default model so that users can hop between different apps without needing to change models as often.
 
 ## Key Folders and Files
 
 * index.html - top-level index.html that will be deployed to web root.
 * src/ - root for all source that is built into the bundle.
   * common/ - Kitchen-sink folder for small utility modules and other source that doesn't merit grouping under a more general concept.
-  * init/ - routing, plus location for any source files called as part of initialiation.
+  * init/ - location for any source files called as part of initialiation.
   * developer/ - code that is really only meant to run at dev time - testing tools, profiling, backdoors.
   * llm/ - client access and other utilities around LLM. llmUtil.ts has top-level functions for calling an inference interface provided either by Ollama or WebLLM.
   * persistence/ - utilities around persisting data in IndexedDb in a key/document style with capability of importing/exporting documents as files.
   * loadScreen/ - screen that loads the chosen LLM model locally and shows progress.
   * homeScreen/ - screen that is arrived at after loading completes. In the template, this screen has a basic LLM chat interface that can be replaced.
 * public/ - files and folders that will be web-accessible in the folder that built bundles and index.html are deployed to.
-* .github - Continuous deployment script that will deploy on push to a folder on decentapps.net. Requires configuration of secret vars on the Github repo - otherwise deployment will fail benignly when you push. You can delete/edit this script if you don't want to deploy to decentapps.net.
 
 ## Source Conventions
 
 You can depart from the conventions below if you don't like them. I include them as an explanation for the starting files, and you are invited to continue the conventions if you want.
 
-* Screens correspond to URL-based routes. A "screen" is just a cluster of self-contained UI that renders over the entire client rect.
+* A "screen" is just a cluster of self-contained UI that renders over the entire client rect.
 * Each screen function uses React hooks for state management and tends to be the top-level of state passing down to sub-components through props.
 * The screen function calls an `init()` function when it mounts which can also instance module-scope variables as additional state.
 * Any state that is intended to be shared between screens is persisted using `/src/persistence/pathStore`. There is no need for an in-memory store (e.g. Redux) with this approach. And if you persist all data needed to initialize a screen, it effectively creates a saved session that a user can return to on the same device. That saved state is also exportable and importable (useful for backing up or transferring data between devices).
