@@ -13,20 +13,19 @@ There's some dev-specific content below to get you started. I figure you might r
 3. `npm run dev`
 4. Browse to http://localhost:3000/ or whatever URL is shown in the output of the previous command.
 
-## Deploying to DecentApps.net
+## Deploying to the Decent Portal (decentapps.net)
 
-Please see my comments about doing this in the [`create-decent-app` readme](https://github.com/erikh2000/create-decent-app/blob/main/readme.md). 
+Please see my comments about doing this in the [`create-decent-app` readme](https://github.com/erikh2000/create-decent-app/blob/main/readme.md).
 
 ## What You Have Now
 
 The unmodified template installed for Decent App includes these screens:
 
-* A loading screen that will show progress loading either Ollama (optional for development) or WebLLM (production).
+* A loading screen that will show progress loading model into browser via WebLLM.
 * A home screen that lets you send a simple prompt to a local LLM. Arriving to the home screen without an LLM connection will redirect to the loading screen. This redirection will be confirmed with a dialog if you are serving locally. This is to avoid excessive LLM reloading triggered by code changes during development.
 
 The dependencies are minimal: (see package.json)
 
-* wouter - Basic URL routing.
 * webllm - For web-based LLM inference.
 * dev dependencies for Vite/Babel/Typescript (build tooling), Vitest (test runner)
 
