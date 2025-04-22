@@ -7,7 +7,6 @@ import ContentButton from '@/components/contentButton/ContentButton';
 import LoadScreen from '@/loadScreen/LoadScreen';
 
 import { DecentBar } from "decent-portal";
-import "decent-portal/dist/decent-portal.css";
 import { useEffect, useState } from "react";
 
 function HomeScreen() {

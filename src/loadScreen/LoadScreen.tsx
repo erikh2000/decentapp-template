@@ -5,7 +5,6 @@ import ProgressBar from '@/components/progressBar/ProgressBar';
 import LLMDevPauseDialog from './dialogs/LLMDevPauseDialog';
 
 import { DecentBar } from "decent-portal";
-import "decent-portal/dist/decent-portal.css";
 import {useState, useEffect} from "react";
 
 type Props = {
