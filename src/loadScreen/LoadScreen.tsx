@@ -4,6 +4,8 @@ import { init } from "./interactions/initialization";
 import ProgressBar from '@/components/progressBar/ProgressBar';
 import LLMDevPauseDialog from './dialogs/LLMDevPauseDialog';
 
+import { DecentBar } from "decent-portal";
+import "decent-portal/dist/decent-portal.css";
 import {useState, useEffect} from "react";
 
 type Props = {
@@ -24,7 +26,7 @@ function LoadScreen(props:Props) {
   
   return (
     <div className={styles.container}>
-      <div className={styles.header}><h1>Decent App - Loading</h1></div>
+      <DecentBar appName="Decent App" />
       <div className={styles.content}>
         <div className={styles.progressBarContainer}>
           <ProgressBar percentComplete={percentComplete}/>

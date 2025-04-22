@@ -6,6 +6,8 @@ import { GENERATING, submitPrompt } from "./interactions/prompt";
 import ContentButton from '@/components/contentButton/ContentButton';
 import LoadScreen from '@/loadScreen/LoadScreen';
 
+import { DecentBar } from "decent-portal";
+import "decent-portal/dist/decent-portal.css";
 import { useEffect, useState } from "react";
 
 function HomeScreen() {
@@ -38,7 +40,7 @@ function HomeScreen() {
   
   return (
     <div className={styles.container}>
-      <div className={styles.header}><h1>Hi, I'm a screen.</h1></div>
+      <DecentBar appName="Decent App" appLinks={[{description:"Support", url:"TODO ADD LINK"}]}/>
       <div className={styles.content}>
         <img src={eyesPng} alt="Eyes" className={`${styles.eyes} ${eyesState}`}/>
         <p><input type="text" className={styles.promptBox} placeholder="Say anything to this screen" value={prompt} onKeyDown={_onKeyDown} onChange={(e) => setPrompt(e.target.value)}/>
