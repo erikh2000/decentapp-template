@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import WaitingEllipsis from '@/components/waitingEllipsis/WaitingEllipsis';
 import styles from './HomeScreen.module.css';
 import eyesPng from './images/eyes.png';
@@ -5,9 +7,7 @@ import { init } from "./interactions/initialization";
 import { GENERATING, submitPrompt } from "./interactions/prompt";
 import ContentButton from '@/components/contentButton/ContentButton';
 import LoadScreen from '@/loadScreen/LoadScreen';
-
-import { DecentBar } from "decent-portal";
-import { useEffect, useState } from "react";
+import TopBar from '@/components/topBar/TopBar';
 
 function HomeScreen() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -39,7 +39,7 @@ function HomeScreen() {
   
   return (
     <div className={styles.container}>
-      <DecentBar appName="Decent App" appLinks={[{description:"Support", url:"TODO ADD LINK"}]}/>
+      <TopBar />
       <div className={styles.content}>
         <img src={eyesPng} alt="Eyes" className={`${styles.eyes} ${eyesState}`}/>
         <p><input type="text" className={styles.promptBox} placeholder="Say anything to this screen" value={prompt} onKeyDown={_onKeyDown} onChange={(e) => setPrompt(e.target.value)}/>

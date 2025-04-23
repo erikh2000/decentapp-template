@@ -1,11 +1,11 @@
+import {useState, useEffect} from "react";
+
 import { isServingLocally } from '@/developer/devEnvUtil';
 import styles from './LoadScreen.module.css';
 import { init } from "./interactions/initialization";
 import ProgressBar from '@/components/progressBar/ProgressBar';
 import LLMDevPauseDialog from './dialogs/LLMDevPauseDialog';
-
-import { DecentBar } from "decent-portal";
-import {useState, useEffect} from "react";
+import TopBar from '@/components/topBar/TopBar';
 
 type Props = {
   onComplete: () => void;
@@ -25,7 +25,7 @@ function LoadScreen(props:Props) {
   
   return (
     <div className={styles.container}>
-      <DecentBar appName="Decent App" />
+      <TopBar />
       <div className={styles.content}>
         <div className={styles.progressBarContainer}>
           <ProgressBar percentComplete={percentComplete}/>
