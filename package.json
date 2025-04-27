@@ -1,7 +1,7 @@
 {
   "name": "decentapp-template",
   "private": true,
-  "version": "1.1.1",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -18,7 +18,7 @@
     "@mlc-ai/web-llm": "^0.2.78",
     "@mlc-ai/web-runtime": "^0.18.0-dev2",
     "@mlc-ai/web-tokenizers": "^0.1.5",
-    "decent-portal": "^1.0.0",
+    "decent-portal": "^1.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

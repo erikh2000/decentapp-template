@@ -13,20 +13,6 @@ There's some dev-specific content below to get you started. I figure you might r
 3. `npm run dev`
 4. Browse to http://localhost:3000/ or whatever URL is shown in the output of the previous command.
 
-## Creating an App for Decent Portal
-
-If you'd like to make an app that can be deployed to the Decent Portal.
-
-1. Change your working directory to the project root (folder this file is in).
-2. `npm install decent-portal`
-3. `npm run portal`
-
-What will this do?
-
-It will create Github action files for deploying, promoting, and rolling back into your project. For these to work, you will need to configure a Github repository with secret variables provided by us. Email launch@decentapps.net for more info.
-
-It will make the <DecentBar> React component importable from the library. You can add this into your screens to show UI that allows navigation through the portal. The component can be configured to only render from decentapps.net if you want to deploy the same app to other websites.
-
 ## What You Have Now
 
 The unmodified template installed for Decent App includes these screens:
@@ -40,14 +26,6 @@ The dependencies are minimal: (see package.json)
 * dev dependencies for Vite/Typescript (build tooling), Vitest (test runner)
 
 There is no monolithic dev-dependency package to install and upgrade. You are in charge of updating and revising your dependencies in the way you like.
-
-## What Happened to Ollama Support? (2.0 Update)
-
-I'm trying to streamline the code by removing Ollama support. There is a concept of a Custom LLM that I've implemented in [Hone](https://github.com/erikh2000/hone) and may bring to create-decent-app in a later release. This would allow using Ollama and other LLM servers/services. Let me know if you have an interest.
-
-## What Happened to Wouter/URL-Based Routes? (2.0 Update)
-
-Again, streamlining. I try to remove dependencies where I can. Much as I like Wouter, I think most devs won't need it. There are only two screens in the generated project, and one of them (the loading screen) isn't useful to be accessed from a URL. If you do want a router, feel free to install Wouter (recommended!) or your favorite library.
 
 ## Removing and Changing Unwanted Things
 
